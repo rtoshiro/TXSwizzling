@@ -6,4 +6,6 @@ target 'TXSwizzling_Tests', :exclusive => true do
   pod "TXSwizzling", :path => "../"
 
   pod 'Kiwi'
+  
+  link_with "TXSwizzling", "TXSwizzling_Tests"
 end

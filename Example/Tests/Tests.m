@@ -8,35 +8,23 @@
 
 // https://github.com/kiwi-bdd/Kiwi
 
+#import "NSObject+Swizzling.h"
+
+
 SPEC_BEGIN(InitialTests)
 
-describe(@"My initial tests", ^{
+describe(@"TXSwizzling Tests", ^{
 
-  context(@"will fail", ^{
+  context(@"Class Methods", ^{
 
-      it(@"can do maths", ^{
-          [[@1 should] equal:@2];
-      });
+    it(@"exchanging existing methods", ^{
+      NSString *foo = @"FOO";
+      
+      [NSString swizzleSelector:@selector(uppercaseString) to:@selector(lowercaseString)];
+      
+      [[[foo uppercaseString] should] equal:@"foo"];
+    });
 
-      it(@"can read", ^{
-          [[@"number" should] equal:@"string"];
-      });
-    
-      it(@"will wait and fail", ^{
-          NSObject *object = [[NSObject alloc] init];
-          [[expectFutureValue(object) shouldEventually] receive:@selector(autoContentAccessingProxy)];
-      });
-  });
-
-  context(@"will pass", ^{
-    
-      it(@"can do maths", ^{
-        [[@1 should] beLessThan:@23];
-      });
-    
-      it(@"can read", ^{
-          [[@"team" shouldNot] containString:@"I"];
-      });  
   });
   
 });
