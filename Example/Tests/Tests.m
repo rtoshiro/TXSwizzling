@@ -24,7 +24,21 @@ describe(@"TXSwizzling Tests", ^{
       
       [[[foo uppercaseString] should] equal:@"foo"];
     });
+    
 
+  });
+  
+  context(@"Instance Methods", ^{
+    
+    it(@"exchanging existing methods", ^{
+      NSString *foo = @"foo";
+      
+      [foo subclassSwizzlingSelector:@selector(substringFromIndex:) to:@selector(substringToIndex:)];
+      
+      [[[foo substringToIndex:1] should] equal:@"f"];
+    });
+    
+    
   });
   
 });
